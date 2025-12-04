@@ -8,8 +8,8 @@ TRIG_A = 16
 ECHO_A = 26
 
 # NEW: Sensor B: new ultrasonic, e.g. right side
-TRIG_B = 6      # NEW
-ECHO_B = 5      # NEW
+TRIG_B = 6      
+ECHO_B = 5      
 
 # === Motor pins (BCM) ===
 IN1A = 17
@@ -25,8 +25,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIG_A, GPIO.OUT)
 GPIO.setup(ECHO_A, GPIO.IN)
 
-GPIO.setup(TRIG_B, GPIO.OUT)   # NEW
-GPIO.setup(ECHO_B, GPIO.IN)    # NEW
+GPIO.setup(TRIG_B, GPIO.OUT)   
+GPIO.setup(ECHO_B, GPIO.IN)    
 
 # Motor GPIO setup
 GPIO.setup(IN1A, GPIO.OUT)
@@ -43,12 +43,12 @@ pwm_a.start(0)
 pwm_b.start(0)
 
 GPIO.output(TRIG_A, False)
-GPIO.output(TRIG_B, False)     # NEW
+GPIO.output(TRIG_B, False)     
 
 print("Waiting for ultrasonic sensors to settle...")
 time.sleep(2)
 
-def fmt_dist(d):  # NEW
+def fmt_dist(d): 
     if d is None:
         return "None"
     return f"{d:.1f}"
@@ -86,7 +86,7 @@ def get_two_distances():
     d_b = get_distance(TRIG_B, ECHO_B)
     return d_a, d_b
 
-# Same distance→speed mapping as之前
+# Same distance→speed mapping as before
 def distance_to_speed(dist_cm):
     """0 cm -> 0%; 50 cm+ -> 100%; linear in between."""
     if dist_cm is None:
@@ -153,7 +153,7 @@ try:
             diff = dist_a - dist_b  # >0: A side farther; <0: B side farther
 
             if diff > ALIGN_THRESHOLD:
-                # Sensor A sees farther → target偏向 B 这一侧
+                # Sensor A sees farther → target turns to B
                 # make motor A faster
                 speed_a = min(base_speed + ALIGN_BOOST, 100.0)
                 speed_b = base_speed
@@ -161,7 +161,7 @@ try:
                 # Sensor B sees farther
                 speed_b = min(base_speed + ALIGN_BOOST, 100.0)
                 speed_a = base_speed
-            # |diff| <= threshold: 保持直行，speed_a / speed_b 已经相等
+            # |diff| <= threshold: keep straight，speed_a / speed_b same
 
         set_motor_speeds(speed_a, speed_b)
 
