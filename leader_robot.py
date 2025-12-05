@@ -173,13 +173,13 @@ def stop():
 def move(object_location):
 	if object_location < CENTER_LEFT:
 		# Need to turn left
-		turn_left(25)
+		turn_left(50)
 	elif object_location > CENTER_RIGHT:
 		# Need to turn right
-		turn_right(25)
+		turn_right(50)
 	else:
 		# In the middle
-		forward(25)
+		forward(50)
 
 # Threads
 def move_sequence_thread():
@@ -199,10 +199,10 @@ def move_sequence_thread():
 			break
 		else:
 			if i % 2 == 0:
-				forward(25)
+				forward(50)
 				time.sleep(5)
 			else:
-				turn_right(25)
+				turn_right(50)
 				time.sleep(2)
 			
 			i += 1
@@ -252,7 +252,7 @@ def seek_thread():
 					time.sleep(0.01)
 		else:
 			# Not Found, turn?
-			turn_left(25)
+			turn_left(50)
 			
 		cv2.waitKey(1)
 
