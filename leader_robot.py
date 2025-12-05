@@ -40,7 +40,7 @@ UPPER = np.array([120, 255, 255])
 # 100, 200, 255
 
 # Area
-STOP = 10000
+STOP = 30000
 DETECT = 500
 
 # Boundaries
@@ -257,7 +257,7 @@ def seek_thread():
 					stop()
 					seek_running = False
 					send_command("FOUND")
-					dance()
+					dance(50)
 					# quit
 					robot_running = False
 					break
