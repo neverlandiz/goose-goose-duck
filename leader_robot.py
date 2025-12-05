@@ -110,7 +110,7 @@ def move_sequence(channel):
 GPIO.add_event_detect(QUIT_BUTTON_PIN, GPIO.FALLING, callback=physical_quit_callback, bouncetime=200)
 GPIO.add_event_detect(START_SEEK_BUTTON_PIN, GPIO.FALLING, callback=seek_callback, bouncetime=200)
 GPIO.add_event_detect(MOVE_SEQUENCE_BUTTON_PIN, GPIO.FALLING, callback=move_sequence, bouncetime=200)
-GPIO.add_event_detect(TEMP_QUIT_PIN, GPIO.FALLING, callback=move_sequence, bouncetime=200)
+GPIO.add_event_detect(TEMP_QUIT_PIN, GPIO.FALLING, callback=temp_quit_callback, bouncetime=200)
 
 # Motor Functions
 def forward(dc):
