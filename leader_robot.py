@@ -61,6 +61,7 @@ pright = GPIO.PWM(RIGHT_MOTOR_PWM, frequency)
 # WiFi Setup
 UDP_IP = ""
 UDP_PORT = 5005
+FOLLOWER_IP = ""
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
@@ -169,7 +170,7 @@ def move(object_location):
 		# In the middle
 		forward(25)
 
-# Thread
+# Threads
 def move_sequence_thread():
 	global seek_running
 	global move_sequence_running
@@ -225,7 +226,7 @@ def seek_thread():
 					print("FOUND")
 					stop()
 					seek_running = False
-					sock.sendto("FOUND".encode(), (UDP_IP, UDP_PORT))
+					send_command("FOUND")
 					break
 				else:
 					# Seek
@@ -238,6 +239,19 @@ def seek_thread():
 			
 		cv2.waitKey(1)
 
+# Send and Received
+def send_command(message):
+	sock.sendto(message.encode(), (FOLLOWER_IP, UDP_PORT))
+	print("Send: ", message)
+
+def receive_command():
+	try:
+		data, addr = sock.recvfrom(1024)
+		print("Received: ", data)
+		return data.decode()
+	except socket.timeout:
+		return None
+
 # Start Camera
 camera = Picamera2()
 camera.start()
@@ -249,17 +263,12 @@ pright.start(0)
 # Main Loop
 while robot_running:
 	# communication from baby duck
-	try:
-		data, addr = sock.recvfrom(1024)
-		print("Received", data)
-	
-		if data.decode() == "LOST":
-			if not seek_running:
-				seek_running = True
-				seek_t = threading.Thread(target=seek_thread, daemon=True)
-				seek_t.start()
-	except socket.timeout:
-		continue
+	received_data = receive_command()
+	if received_data == "LOST":
+		if not seek_running:
+			seek_running = True
+			seek_t = threading.Thread(target=seek_thread, daemon=True)
+			seek_t.start()
 	
 	time.sleep(1)
 
