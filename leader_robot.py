@@ -61,7 +61,7 @@ pright = GPIO.PWM(RIGHT_MOTOR_PWM, frequency)
 # WiFi Setup
 UDP_IP = ""
 UDP_PORT = 5005
-FOLLOWER_IP = ""
+FOLLOWER_IP = "10.49.242.23"
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
@@ -133,6 +133,17 @@ def turn_right(dc):
 	pleft.ChangeDutyCycle(0)
 	pright.ChangeDutyCycle(dc)
 	time.sleep(pulse_width)
+
+def dance(dc):
+	print("Dance")
+
+	GPIO.output(LEFT_MOTOR_IN1, GPIO.LOW)
+	GPIO.output(LEFT_MOTOR_IN2, GPIO.LOW)
+	GPIO.output(RIGHT_MOTOR_IN1, GPIO.HIGH)
+	GPIO.output(RIGHT_MOTOR_IN2, GPIO.LOW)
+	pleft.ChangeDutyCycle(0)
+	pright.ChangeDutyCycle(dc)
+	time.sleep(5)
 
 def backward(dc):
 	print("Move Backward")
@@ -227,6 +238,7 @@ def seek_thread():
 					stop()
 					seek_running = False
 					send_command("FOUND")
+					dance()
 					break
 				else:
 					# Seek
@@ -239,7 +251,7 @@ def seek_thread():
 			
 		cv2.waitKey(1)
 
-# Send and Received
+# Send and Receive
 def send_command(message):
 	sock.sendto(message.encode(), (FOLLOWER_IP, UDP_PORT))
 	print("Send: ", message)
