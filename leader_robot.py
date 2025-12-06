@@ -205,6 +205,7 @@ def move_sequence_thread():
 	
 	i = 0
 	while move_sequence_running and robot_running:
+		receive_command()
 		if not robot_running:
 			# robot quit
 			move_sequence_running = False
