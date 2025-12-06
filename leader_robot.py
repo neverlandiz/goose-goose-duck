@@ -187,13 +187,13 @@ def stop():
 def move(object_location):
 	if object_location < CENTER_LEFT:
 		# Need to turn left
-		turn_left(40)
+		turn_left(50)
 	elif object_location > CENTER_RIGHT:
 		# Need to turn right
-		turn_right(40)
+		turn_right(50)
 	else:
 		# In the middle
-		forward(40)
+		forward(50)
 
 # Threads
 def move_sequence_thread():
@@ -213,10 +213,10 @@ def move_sequence_thread():
 			break
 		else:
 			if i % 2 == 0:
-				forward(40)
+				forward(50)
 				time.sleep(5)
 			else:
-				turn_right(40)
+				turn_right(50)
 				time.sleep(2)
 			
 			i += 1
