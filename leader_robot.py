@@ -242,7 +242,7 @@ def move_sequence_thread():
 			else:
 				if i % 2 == 0:
 					move_left(45)
-					time.slee(1)
+					time.sleep(1)
 				else:
 					move_right(45)
 					time.sleep(1)
