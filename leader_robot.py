@@ -238,14 +238,14 @@ def move_sequence_thread():
 		else:
 			if i % 3 == 0:
 				forward(45)
-				time.sleep(5)
+				time.sleep(3)
 			else:
 				if i % 2 == 0:
 					move_left(45)
-					time.sleep(2)
+					time.sleep(1)
 				else:
 					move_right(45)
-					time.sleep(2)
+					time.sleep(1)
 			
 			i += 1
 
