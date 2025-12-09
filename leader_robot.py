@@ -40,7 +40,7 @@ UPPER = np.array([120, 255, 255])
 # 100, 200, 255
 
 # Area
-STOP = 300
+STOP = 200
 # STOP = 10000
 # want around 164,649?
 DETECT = 500
@@ -57,7 +57,7 @@ seek_running = False
 move_sequence_running = False
 
 # Motor Variables
-frequency = 50
+frequency = 45
 pulse_width = 0.2
 pleft = GPIO.PWM(LEFT_MOTOR_PWM, frequency)
 pright = GPIO.PWM(RIGHT_MOTOR_PWM, frequency)
@@ -187,13 +187,13 @@ def stop():
 def move(object_location):
 	if object_location < CENTER_LEFT:
 		# Need to turn left
-		turn_left(50)
+		turn_left(45)
 	elif object_location > CENTER_RIGHT:
 		# Need to turn right
-		turn_right(50)
+		turn_right(45)
 	else:
 		# In the middle
-		forward(50)
+		forward(45)
 
 # Threads
 def move_sequence_thread():
@@ -213,10 +213,10 @@ def move_sequence_thread():
 			break
 		else:
 			if i % 2 == 0:
-				forward(50)
+				forward(45)
 				time.sleep(5)
 			else:
-				turn_right(50)
+				turn_right(45)
 				time.sleep(2)
 			
 			i += 1
