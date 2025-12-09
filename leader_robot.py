@@ -120,7 +120,7 @@ def forward(dc):
 	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
-	pleft.ChangeDutyCycle(dc * 1.2)
+	pleft.ChangeDutyCycle(dc * 1.25)
 	pright.ChangeDutyCycle(dc)
 	time.sleep(pulse_width)
 
@@ -131,7 +131,7 @@ def move_right(dc):
 	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
-	pleft.ChangeDutyCycle(dc * 1.8)
+	pleft.ChangeDutyCycle(dc * 1.45)
 	pright.ChangeDutyCycle(dc)
 	time.sleep(1)
 
@@ -143,7 +143,7 @@ def move_left(dc):
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
 	pleft.ChangeDutyCycle(dc)
-	pright.ChangeDutyCycle(dc * 1.4)
+	pright.ChangeDutyCycle(dc * 1.2)
 	time.sleep(1)
 
 def turn_left(dc):
