@@ -35,7 +35,7 @@ GPIO.setup(TEMP_QUIT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Color Range
 # Currently, red?
-LOWER = np.array([80, 150, 80])
+LOWER = np.array([80, 180, 80])
 UPPER = np.array([120, 255, 255])
 # 100, 200, 255
 
@@ -120,7 +120,7 @@ def forward(dc):
 	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
-	pleft.ChangeDutyCycle(dc * 1.2)
+	pleft.ChangeDutyCycle(dc)
 	pright.ChangeDutyCycle(dc)
 	time.sleep(pulse_width)
 
@@ -132,7 +132,7 @@ def move_right(dc):
 	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
-	pleft.ChangeDutyCycle(dc * 1.2)
+	pleft.ChangeDutyCycle(dc)
 	pright.ChangeDutyCycle(dc * 2)
 	time.sleep(pulse_width)
 
