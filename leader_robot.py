@@ -124,6 +124,30 @@ def forward(dc):
 	pright.ChangeDutyCycle(dc)
 	time.sleep(pulse_width)
 
+def move_right(dc):
+	print("Tilt Right")
+
+	global pulse_width
+	GPIO.output(LEFT_MOTOR_IN1, GPIO.LOW)
+	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
+	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
+	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
+	pleft.ChangeDutyCycle(dc * 1.2)
+	pright.ChangeDutyCycle(dc * 2)
+	time.sleep(pulse_width)
+
+def move_left(dc):
+	print("Tilt Left")
+
+	global pulse_width
+	GPIO.output(LEFT_MOTOR_IN1, GPIO.LOW)
+	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
+	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
+	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
+	pleft.ChangeDutyCycle(dc * 2)
+	pright.ChangeDutyCycle(dc)
+	time.sleep(pulse_width)
+
 def turn_left(dc):
 	print("Turn Left")
 	
@@ -216,8 +240,12 @@ def move_sequence_thread():
 				forward(45)
 				time.sleep(5)
 			else:
-				turn_right(45)
-				time.sleep(2)
+				if i % 3 == 0:
+					move_right(40)
+					time.sleep(2)
+				else:
+					move_left(40)
+					time.sleep(2)
 			
 			i += 1
 
