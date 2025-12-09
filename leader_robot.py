@@ -144,7 +144,7 @@ def move_left(dc):
 	GPIO.output(LEFT_MOTOR_IN2, GPIO.HIGH)
 	GPIO.output(RIGHT_MOTOR_IN1, GPIO.LOW)
 	GPIO.output(RIGHT_MOTOR_IN2, GPIO.HIGH)
-	pleft.ChangeDutyCycle(dc * 1.2)
+	pleft.ChangeDutyCycle(dc)
 	pright.ChangeDutyCycle(dc * 1.4)
 	time.sleep(pulse_width)
 
