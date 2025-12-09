@@ -236,11 +236,11 @@ def move_sequence_thread():
 			move_sequence_running = False
 			break
 		else:
-			if i % 2 == 0:
+			if i % 3 == 0:
 				forward(45)
 				time.sleep(5)
 			else:
-				if i % 3 == 0:
+				if i % 2 == 0:
 					move_right(40)
 					time.sleep(2)
 				else:
